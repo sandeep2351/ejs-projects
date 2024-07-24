@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Currency Converter</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Currency Converter</h1>
+    <form action="/convert" method="POST">
+      <div class="form-group">
+        <label for="fromCurrency">From Currency:</label>
+        <select id="fromCurrency" name="fromCurrency" required>
+          <% currencies.forEach(currency => { %>
+            <option value="<%= currency[0] %>"><%= currency[1] %> (<%= currency[0] %>)</option>
+          <% }); %>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="toCurrency">To Currency:</label>
+        <select id="toCurrency" name="toCurrency" required>
+          <% currencies.forEach(currency => { %>
+            <option value="<%= currency[0] %>"><%= currency[1] %> (<%= currency[0] %>)</option>
+          <% }); %>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="amount">Amount:</label>
+        <input type="number" id="amount" name="amount" required>
+      </div>
+      <button type="submit">Convert</button>
+    </form>
+
+    <% if (convertedAmount !== null) { %>
+      <h2><%= amount %> <%= fromCurrency %> is <%= convertedAmount %> <%= toCurrency %></h2>
+    <% } %>
+
+    <% if (error) { %>
+      <p class="error"><%= error %></p>
+    <% } %>
+  </div>
+</body>
+</html>
